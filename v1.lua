@@ -1,5 +1,15 @@
+-- Check if lp_key was set before loading
+if not lp_key or lp_key == "" then
+    -- If not set, try to get it from _G (global)
+    lp_key = _G.lp_key or ""
+end
 
+-- If still no key, show error
+if lp_key == "" then
+    error("No key provided! Please set lp_key before loading.")
+end
 
+-- LOADER STARTS HERE
 local f, c, v = "12125701348483376783", http and http.request or request, function(h) 
     while(task.wait()) do
         pcall(function() 
