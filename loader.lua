@@ -1,54 +1,19 @@
--- SAFE LOADER - With HWID Support
-local key = _G.lp_key or lp_key or ""
 
-if key == "" then
-    game:GetService("Players").LocalPlayer:Kick("No key provided!")
-    return
-end
+--[[
 
--- Get HWID
-local function getHWID()
-    local success, result = pcall(function()
-        return game:GetService("RbxAnalyticsService"):GetClientId()
-    end)
-    if success and result then
-        return result
-    end
-    return ""
-end
-
-local hwid = getHWID()
-
--- Simple function to get script with HWID
-local function loadScript()
-    local url = "https://eu-1.luaprot.net/api/v2/loader/get?key=" .. key .. "&scriptId=12125701348483376783&hwid=" .. hwid
+You can upload this file on your github, pastebin, anywhere you want and generate a loadstring.
     
-    local success, result = pcall(function()
-        return game:HttpGet(url)
-    end)
+Add 'lp_key' variable if your user has a key on top of this loader.
 
-    if success and result and result ~= "" then
-        local func = loadstring(result)
-        if func then
-            return func
-        else
-            return nil, "Invalid script response"
-        end
-    else
-        return nil, "Connection failed: " .. tostring(result)
-    end
-end
+You can remove this message block as you like.
 
--- Try to load
-local func, err = loadScript()
 
-if func then
-    pcall(func, "eu-1")
-else
-    pcall(function()
-        local player = game:GetService("Players").LocalPlayer
-        if player then
-            player:Kick("Failed to load script: " .. (err or "Unknown error"))
-        end
-    end)
-end
+ _                ____            _   
+| |   _   _  __ _|  _ \ _ __ ___ | |_ 
+| |  | | | |/ _` | |_) | '__/ _ \| __|
+| |__| |_| | (_| |  __/| | | (_) | |_ 
+|_____\__,_|\__,_|_|   |_|  \___/ \__|
+                                    
+
+]]--
+("LuaProt V2 Loader - Unauthorized tampering or debugging of protected scripts is strictly prohibited and will result in a global blacklist from all LuaProt protected scripts."):sub(1,1);local f,c,v="12125701348483376783",http and http.request or request,function(h) while(task.wait())do pcall(function() game:GetService("Players").LocalPlayer:Kick(h);local v=game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ErrorPrompt;v.TitleFrame.ErrorTitle.Text="LuaProt";v.MessageArea.ErrorFrame.ErrorMessage.Text=h; end); end; end;lp_key=lp_key or "x";local b,o,h,k,d;o={"eu-1","as-1","us-1"};h,k=pcall(c,{Url="https://eu-1.luaprot.net/api/v1/nodes/get"});if(h and k and k.StatusCode==200)then pcall(function() d=game:GetService("HttpService"):JSONDecode(k.Body); end);if(d and d.success and d.node)then for i,n in o do if(n==d.node)then table.insert(o,1,table.remove(o,i));break; end; end; end; end;for i=1,5 do if(b)then break; end;for _,p in o do local r,y=os.clock();task.spawn(pcall,function() y=c({Url="https://"..p..".luaprot.net/api/v2/loader/get?key="..lp_key.."&scriptId="..f}); end);repeat task.wait(); until(os.clock()-r>5 or y);if(y and ({[200]=i,[201]=i})[y.StatusCode])then LP_NODE=p;b=loadstring(y.Body);if(b)then break; end; end; end; end;if(b)then b(LP_NODE); else v("V2 loader failed to load script. Report this and try again later!"); end;
